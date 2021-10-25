@@ -10,7 +10,16 @@
 def field(items, *args):
     assert len(args) > 0
     rez = list()
-    for item in items:
-        rez.append({key: item[key] for key in args})
+    if len(args) == 1:
+        for item in items:
+            if item.keys().__contains__(args[0]):
+                rez.append(item[args[0]])
+    else:
+        for item in items:
+            d = dict()
+            for key in args:
+                if item.keys().__contains__(key):
+                    d[key] = item[key]
+            rez.append(d)
     return rez
 

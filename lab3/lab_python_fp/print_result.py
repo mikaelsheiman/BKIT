@@ -1,15 +1,15 @@
 
 def print_result(f):
 
-    def wrapper():
+    def wrapper(*args):
         print(f.__name__)
-        res = f()
-        if type(res) == 'list':
+        res = f(*args)
+        if isinstance(res, list):
             for item in res:
                 print(item)
-        elif type(res) == 'dict':
-            for key, value in res:
-                print('{} = {}'.format(key, value))
+        elif isinstance(res, dict):
+            for key in res.keys():
+                print('{} = {}'.format(key, res[key]))
         else:
             print(res)
         return res

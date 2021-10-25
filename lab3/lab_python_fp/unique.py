@@ -9,13 +9,9 @@ class Unique(object):
             raise StopIteration
         rez = self.items[0]
         if self.ignore_case:
-            for i in self.items.copy(): #Почему здесь без копии не работает
-                if str.lower(i) == str.lower(rez):
-                    print('x', i)
-                    self.items.remove(i)
+            self.items = list(filter(lambda x: str(x).lower() != str.lower(rez), self.items))
         else:
-            while rez in self.items: #А здесь работает?
-                self.items.remove(rez)
+            self.items = list(filter(lambda x: x != rez, self.items))
         return rez
 
     def __iter__(self):
