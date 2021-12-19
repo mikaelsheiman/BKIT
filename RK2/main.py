@@ -21,48 +21,17 @@ class PL_Syn:
         self.syn_id = syn_id
 
 
-PLs: list[PL] = [
-    PL(1, 'Python'),
-    PL(2, 'C++'),
-    PL(3, 'C#'),
-    PL(4, 'Java')
-]
-Syntaxes = [
-    Syntax(1, 'do-while', 2, 0.5),
-    Syntax(2, 'pointer', 2, 2.0),
-    Syntax(3, 'interface', 3, 2.0),
-    Syntax(4, 'for', 1, 1.5),
-    Syntax(5, 'class', 4, 2.0)
-    # Оценки полезности проставлены случайным образом и не отражают позицию автора
-]
-PL_Syns = [
-    PL_Syn(1, 1),
-    PL_Syn(1, 4),
-    PL_Syn(1, 5),
-    PL_Syn(2, 1),
-    PL_Syn(2, 2),
-    PL_Syn(2, 4),
-    PL_Syn(2, 5),
-    PL_Syn(3, 1),
-    PL_Syn(3, 3),
-    PL_Syn(3, 4),
-    PL_Syn(3, 5),
-    PL_Syn(4, 1),
-    PL_Syn(4, 4),
-    PL_Syn(4, 5)
-]
-
-
-def request1():
+def request1(PLs, Syntaxes):
     one_to_many = [(syn.name, pl.name)
                    for pl in PLs
                    for syn in Syntaxes
                    if (pl.pl_id == syn.pl_id)]
     result = sorted(one_to_many, key=itemgetter(1))
-    print(*result, sep="\n")
+    return result
+    #print(*result, sep="\n")
 
 
-def request2():
+def request2(PLs, Syntaxes):
     one_to_many = [(syn.name, syn.usefulness_grade, pl.name)
                    for pl in PLs
                    for syn in Syntaxes
@@ -74,10 +43,11 @@ def request2():
             sum_ug = sum(ug for _, ug, _ in syns)
             result.append((pl.name, sum_ug))
     result = sorted(result, key=itemgetter(1), reverse=True)
-    print(*result, sep="\n")
+    return result
+    #print(*result, sep="\n")
 
 
-def request3():
+def request3(PLs, Syntaxes, PL_Syns):
     many_to_many_temp = [(pl.name, p_s.syn_id)
                          for pl in PLs
                          for p_s in PL_Syns
@@ -93,16 +63,10 @@ def request3():
             filtered = list(filter(lambda i: i[0] == pl.name, many_to_many))
             s_names = [i for _, i in filtered]
             result[pl.name] = s_names
-    print(result)
+    return result
+    #print(result)
 
 
 def main():
-    request1()
-    print("\n")
-    request2()
-    print("\n")
-    request3()
+    pass
 
-
-if __name__ == "__main__":
-    main()
