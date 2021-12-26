@@ -56,7 +56,7 @@ def weather_data_pars(data):
         recommendations.append("Не забудьте взять зонтик")
 
     weather_description = \
-        (f"Погода в Москве на данный момент:\n"
+        (f"Погода в {data['name']} на данный момент: {weather}\n"
          f"Температура: {temp}C\n"
          f"Ощущается как {feels_like}C\n"
          f"{wind_description}\n") + str(*recommendations)
@@ -74,19 +74,6 @@ def cmd_start(message):
     dbmanager.set(dbmanager.make_key(message.chat.id, config.CURRENT_STATE), config.States.STATE_CHOOSE_CITY.value)
 
 
-@bot.callback_query_handler(func=lambda call: True)
-def query_handler(call):
-    answer = ''
-    if call.data == '5':
-        answer = 'Вы троечник!'
-    elif call.data == '6':
-        answer = 'Вы хорошист!'
-    elif call.data == '7':
-        answer = '*ссылка на ДЗ*'
-    bot.send_message(call.message.chat.id, answer)
-    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
-
-
 @bot.message_handler(func=lambda message: dbmanager.get(
     dbmanager.make_key(message.chat.id, config.CURRENT_STATE)) == config.States.STATE_CHOOSE_CITY.value)
 def choose_city(message):
@@ -99,13 +86,13 @@ def choose_city(message):
         keyboard.row('Погода', 'Ссылка на отчет', 'Сменить город')
         bot.send_message(message.chat.id, f'Выбранный город: {data["name"]}', reply_markup=keyboard)
     except:
-        #dbmanager.set(dbmanager.make_key(message.chat.id, config.CURRENT_STATE), config.States.STATE_START)
         bot.send_message(message.chat.id, 'Возможно, вы ошиблись в написании города. Попробуйте загуглить написание '
                                           'вашего города на латинице')
 
 
 @bot.message_handler(func=lambda message: dbmanager.get(
-    dbmanager.make_key(message.chat.id, config.CURRENT_STATE)) == config.States.STATE_COMMON_WORK.value, content_types='text')
+    dbmanager.make_key(message.chat.id, config.CURRENT_STATE)) == config.States.STATE_COMMON_WORK.value,
+                     content_types='text')
 def common_work(message):
     if message.text.lower() == 'погода':
         data = get_weather(dbmanager.get(dbmanager.make_key(message.chat.id, config.States.STATE_CHOOSE_CITY.value)))
@@ -120,6 +107,19 @@ def common_work(message):
     elif message.text.lower() == 'сменить город':
         dbmanager.set(dbmanager.make_key(message.chat.id, config.CURRENT_STATE), config.States.STATE_CHOOSE_CITY.value)
         bot.send_message(message.chat.id, 'Введите свой город')
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def query_handler(call):
+    answer = ''
+    if call.data == '5':
+        answer = '*ссылка на лаб5*'
+    elif call.data == '6':
+        answer = '*ссылка на лаб6*!'
+    elif call.data == '7':
+        answer = '*ссылка на ДЗ*'
+    bot.send_message(call.message.chat.id, answer)
+    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
 
 
 bot.polling()
