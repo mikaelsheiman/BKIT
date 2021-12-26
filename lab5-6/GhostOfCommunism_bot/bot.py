@@ -113,9 +113,11 @@ def common_work(message):
 def query_handler(call):
     answer = ''
     if call.data == '5':
-        answer = '*ссылка на лаб5*'
+        answer = 'https://github.com/mikaelsheiman/BKIT/blob/main/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20%D0%BF%D0%BE%20%D0' \
+                 '%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9%20%E2%84%965.doc '
     elif call.data == '6':
-        answer = '*ссылка на лаб6*!'
+        answer = 'https://github.com/mikaelsheiman/BKIT/blob/main/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20%D0%BF%D0%BE%20%D0' \
+                 '%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9%20%E2%84%966.doc '
     elif call.data == '7':
         answer = '*ссылка на ДЗ*'
     bot.send_message(call.message.chat.id, answer)
