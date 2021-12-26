@@ -119,7 +119,8 @@ def query_handler(call):
         answer = 'https://github.com/mikaelsheiman/BKIT/blob/main/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20%D0%BF%D0%BE%20%D0' \
                  '%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9%20%E2%84%966.doc '
     elif call.data == '7':
-        answer = '*ссылка на ДЗ*'
+        answer = 'https://github.com/mikaelsheiman/BKIT/blob/main/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20%D0%BF%D0%BE%20%D0' \
+                 '%94%D0%97.doc '
     bot.send_message(call.message.chat.id, answer)
     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id)
 
