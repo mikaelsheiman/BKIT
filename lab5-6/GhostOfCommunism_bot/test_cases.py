@@ -1,25 +1,9 @@
-import unittest
-import bot
-
-
-class BotTest(unittest.TestCase):
-    def test_get_request(self):
-        result = bot.get_weather("moscow")
-        self.assertEqual(True, result is not None)  # add assertion here
-
-    def test_weather_data_pars(self):
-        result = bot.weather_data_pars(test_case)
-        self.assertEqual(expected, result)
-
-
-if __name__ == '__main__':
-    unittest.main()
-
 expected = \
-    (f"Погода в Москве на данный момент:\n"
+    (f"Погода в Moscow на данный момент: Snow\n"
      f"Температура: -6.21C\n"
      f"Ощущается как -13.21C\n"
-     f"Умеренный ветер")
+     f"Умеренный ветер\n"
+     f"Оденьтесь потеплее")
 test_case = {'base': 'stations',
              'clouds': {'all': 100},
              'cod': 200,
