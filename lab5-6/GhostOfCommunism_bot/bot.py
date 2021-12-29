@@ -20,6 +20,7 @@ def weather_data_pars(data):
     feels_like = data['main']['feels_like']
     weather = data['weather'][0]['main']
     wind = data['wind']['speed']
+    name = data['name']
 
     wind_description = ''
     if wind < 0.5:
@@ -56,7 +57,7 @@ def weather_data_pars(data):
         recommendations.append("Не забудьте взять зонтик")
 
     weather_description = \
-        (f"Погода в {data['name']} на данный момент: {weather}\n"
+        (f"Погода в {name} на данный момент: {weather}\n"
          f"Температура: {temp}C\n"
          f"Ощущается как {feels_like}C\n"
          f"{wind_description}\n") + str(*recommendations)
@@ -65,7 +66,7 @@ def weather_data_pars(data):
 
 
 start_message = "Привет! Вас приветствует бот для 5ой и 6ой лаб. На данный момент я умею показывать погоду и больше " \
-                "ничего. Пожалуйста, для продолжения введите название города в котором вы живете."
+                "ничего.\n Пожалуйста, для продолжения введите название города в котором вы живете."
 
 
 @bot.message_handler(commands=['start'])

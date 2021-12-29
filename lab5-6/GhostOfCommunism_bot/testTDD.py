@@ -5,7 +5,7 @@ from test_cases import test_case, expected
 
 class BotTest(unittest.TestCase):
     def test_get_request(self):
-        result = bot.get_weather("moscow")
+        result = bot.get_weather("MoScoW")
         self.assertEqual("moscow", result['name'].lower())
 
     def test_weather_data_pars(self):

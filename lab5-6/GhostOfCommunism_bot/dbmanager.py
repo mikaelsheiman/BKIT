@@ -7,7 +7,6 @@ def get(key):
         try:
             return db[key].decode()
         except KeyError:
-            # в случае ошибки значение по умолчанию - начало диалога
             return config.States.STATE_START.value
 
 
